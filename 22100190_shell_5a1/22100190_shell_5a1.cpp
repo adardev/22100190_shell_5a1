@@ -8,23 +8,16 @@ private:
     int numDatos;
     string preguntaIteracion;
 
-    void intercambiar(int& a, int& b);
-    void mostrarIteracion() const;
+    void mostrarIteracion();
 
 public:
     MetodoShell();
     void ingresoDeDatos();
     void Shell();
-    void imprimirArreglo() const;
+    void imprimirArreglo();
 };
 
-void MetodoShell::intercambiar(int& a, int& b) {
-    int i = a;
-    a = b;
-    b = i;
-}
-
-void MetodoShell::mostrarIteracion() const {
+void MetodoShell::mostrarIteracion() {
     for (int i = 0; i < numDatos; ++i) {
         cout << numeros[i];
         if (i != numDatos - 1) {
@@ -37,10 +30,10 @@ void MetodoShell::mostrarIteracion() const {
 MetodoShell::MetodoShell() {}
 
 void MetodoShell::ingresoDeDatos() {
-    cout << "METODO DE ORDENACION POR SELECCION" << endl;
+    cout << "METODO DE ORDENACION POR SHELL" << endl;
     cout << "Ingresa cuantos datos quieres ordenar: ";
     cin >> numDatos;
-    cin.ignore(); // limpiar el buffer del salto de línea
+    cin.ignore(); // limpiar el buffer del salto de lÃ­nea
 
     cout << "Ingresa los datos separados por espacios: ";
     string entrada;
@@ -64,7 +57,7 @@ void MetodoShell::ingresoDeDatos() {
     cout << "Quieres ver cada iteracion?";
     cin >> preguntaIteracion;
 
-    // Convertir a minúsculas
+    // Convertir a minÃºsculas
     for (char& c : preguntaIteracion) {
         c = tolower(c);
     }
@@ -73,13 +66,12 @@ void MetodoShell::ingresoDeDatos() {
 void MetodoShell::Shell() {
     for (int salto = numDatos / 2; salto > 0; salto /= 2) {
         for (int i = salto; i < numDatos; ++i) {
-            int temp = numeros[i];
             int j = i;
-            while (j >= salto && numeros[j - salto] > temp) {
+            while (j >= salto && numeros[j - salto] > numeros[i]) {
                 numeros[j] = numeros[j - salto];
                 j -= salto;
             }
-            numeros[j] = temp;
+            numeros[j] = numeros[i];
         }
         if (preguntaIteracion == "si") {
             mostrarIteracion();
@@ -87,7 +79,7 @@ void MetodoShell::Shell() {
     }
 }
 
-void MetodoShell::imprimirArreglo() const {
+void MetodoShell::imprimirArreglo() {
     for (int i = 0; i < numDatos; ++i) {
         cout << numeros[i] << " ";
     }
